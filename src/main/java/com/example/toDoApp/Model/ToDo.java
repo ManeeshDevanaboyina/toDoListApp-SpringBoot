@@ -49,6 +49,10 @@ public class ToDo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public boolean getStatus() {
+		return status;
+	}
 
 	public void setStatus(boolean status) {
 		this.status = status;
