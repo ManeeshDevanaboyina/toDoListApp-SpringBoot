@@ -16,12 +16,12 @@ public class ToDoService {
         return toDoRepo.findAll();
     }
 	
-	public void insert(ToDo toDo) {
-		 toDoRepo.save(toDo);	 
+	public ToDo insert(ToDo toDo) {
+		 return toDoRepo.save(toDo);	 
 		
 	}
 	
-	public ToDo findbyTitle(String title) {
+	public Optional<ToDo> findbyTitle(String title) {
 		
 		return toDoRepo.findByTitle(title);
 	}
