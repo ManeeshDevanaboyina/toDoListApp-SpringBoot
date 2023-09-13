@@ -1,4 +1,5 @@
 package com.example.toDoApp.Service;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,11 @@ public class ToDoService {
         return toDoRepo.findAll();
     }
 	
-	public ToDo insert(ToDo toDo) {
-		 return toDoRepo.save(toDo);	 
-		
+	public Iterable<ToDo> insert(List<ToDo> toDos) {
+	    Iterable<ToDo> insertedToDos=toDoRepo.saveAll(toDos);
+	    return insertedToDos;
+	
+
 	}
 	
 	public Optional<ToDo> findbyTitle(String title) {

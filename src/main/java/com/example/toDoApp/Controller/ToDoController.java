@@ -1,5 +1,6 @@
 package com.example.toDoApp.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,13 @@ public class ToDoController {
 		 return new ResponseEntity<>(getAll,HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/{title}")
+	@GetMapping(value="/title/{title}")
 	public ResponseEntity<ToDo> findbyTitle(@PathVariable("title") String title) {
 		Optional<ToDo> title1= toDoService.findbyTitle(title);
 		return title1.map(value->new ResponseEntity<>(value,HttpStatus.OK)).orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 	
-	@GetMapping(value="/{id}")
+	@GetMapping(value="/id/{id}")
 	public ResponseEntity<Optional<ToDo>> getTodoById(@PathVariable("id") Integer id) {
 		try {
             Optional<ToDo> todo = toDoService.getTodoById(id);
@@ -49,13 +50,11 @@ public class ToDoController {
 	
 	
 	@PostMapping(value="/create")
-	public ResponseEntity<ToDo> insert(@RequestBody ToDo toDo) {
-		ToDo insert= toDoService.insert(toDo);
+	public ResponseEntity<Iterable<ToDo>> insert(@RequestBody List<ToDo> toDo) {
+
+		Iterable<ToDo> insert= toDoService.insert(toDo);
 		return new ResponseEntity<>(insert,HttpStatus.CREATED);
 	}
-
-	
-	
 	
 	
 	@DeleteMapping(value="/{id}")
