@@ -2,7 +2,11 @@ package com.example.toDoApp.Service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.example.toDoApp.DSO.ToDoPageRepo;
 import com.example.toDoApp.DSO.ToDoRepo;
 import com.example.toDoApp.Model.ToDo;
 
@@ -12,10 +16,19 @@ public class ToDoService {
 
 	@Autowired
 	private ToDoRepo toDoRepo;
-		
-	public Iterable<ToDo> getAllTodos() {
-        return toDoRepo.findAll();
+	
+	@Autowired
+	private ToDoPageRepo toDoPageRepo;
+	
+	
+	
+	public Page<ToDo> getAllTodos(Pageable pageable) {
+        return toDoPageRepo.findAll(pageable);
     }
+	
+	/*public Iterable<ToDo> getAllTodos() {
+        return toDoRepo.findAll();
+    }*/
 	
 	public Iterable<ToDo> insert(Iterable<ToDo> toDo) {
 	    Iterable<ToDo> insertedToDos=toDoRepo.saveAll(toDo);
