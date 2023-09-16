@@ -17,8 +17,8 @@ public class ToDoService {
         return toDoRepo.findAll();
     }
 	
-	public Iterable<ToDo> insert(List<ToDo> toDos) {
-	    Iterable<ToDo> insertedToDos=toDoRepo.saveAll(toDos);
+	public Iterable<ToDo> insert(Iterable<ToDo> toDo) {
+	    Iterable<ToDo> insertedToDos=toDoRepo.saveAll(toDo);
 	    return insertedToDos;
 	
 

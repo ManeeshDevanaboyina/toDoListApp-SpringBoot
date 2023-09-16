@@ -48,9 +48,8 @@ public class ToDoController {
 	}
 	
 	
-	
 	@PostMapping(value="/create")
-	public ResponseEntity<Iterable<ToDo>> insert(@RequestBody List<ToDo> toDo) {
+	public ResponseEntity<Iterable<ToDo>> insert(@RequestBody Iterable<ToDo> toDo) {
 
 		Iterable<ToDo> insert= toDoService.insert(toDo);
 		return new ResponseEntity<>(insert,HttpStatus.CREATED);
@@ -67,8 +66,8 @@ public class ToDoController {
 	}
 	
 	
-	@PutMapping(value="/{id}/{ToDo}")
-	public ResponseEntity<ToDo> updateTodo(@PathVariable("id") Integer id,@PathVariable("ToDo") ToDo updatedTodo) {
+	@PutMapping(value="/{id}")
+	public ResponseEntity<ToDo> updateTodo(@PathVariable("id") Integer id,@RequestBody ToDo updatedTodo) {
 		ToDo updated= toDoService.updateTodo(id,updatedTodo);
 		if(updated!= null) {
 			return new ResponseEntity<>(updated,HttpStatus.OK);
